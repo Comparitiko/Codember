@@ -45,5 +45,3 @@ for (let i = 0; i < palabras.length; i++) {
 
 // Escribir el archivo con el resultado
 await writeFile(`${process.cwd()}/Challenge_01/res_Challenge_01.txt`, res, { encoding: 'utf-8' })
-
-console.log(res)
