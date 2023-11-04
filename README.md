@@ -12,6 +12,7 @@
 ```
 
 ## Para ver las soluciones de los challenges copia los siguientes comandos
+### Dentro de cada carpeta challenge estara el txt con el resultado
 
 ```
 git clone https://github.com/Comparitiko/Codember.git
