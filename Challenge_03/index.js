@@ -5,12 +5,11 @@ const archivo = await readFile(`${process.cwd()}/Challenge_03/encryption_policie
 // Funcion que cuenta las letras que son las mismas que la pasada por parametros y devuelve el numero de veces que se repite
 function contarLetras (palabra, letraABuscar) {
   let contador = 0
-  console.log(contador)
 
-  const letras = palabra.split('')
+  let letras = palabra.split('')
 
   for (const letra of letras) {
-    if (letra == letraABuscar) contador++
+    if (letra === letraABuscar) contador++
   }
 
   return contador
@@ -37,8 +36,9 @@ for (const linea of lineas) {
 
   const numMin = parseInt(numMinString)
   const numMax = parseInt(numMaxString)
+  const palabra = linea.split(' ').slice(2).toString()
 
-  numLetras = contarLetras(linea.split(' ').slice(3), linea[posLetra])
-
-  console.log(`${numMinString}-${numMaxString}, ${numLetras}`)
+  let numLetras = contarLetras(palabra, linea[posLetra])
+  console.log(palabra)
+  console.log(`${palabra}: ${numMin}-${numMax}`)
 }
