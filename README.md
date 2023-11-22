@@ -29,3 +29,7 @@ npm install
 ```
 npm run challenge_01
 ```
+
+```
+npm run challenge_02
+```
