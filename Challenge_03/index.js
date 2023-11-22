@@ -15,6 +15,9 @@ function contarLetras (palabra, letraABuscar) {
   return contador
 }
 
+let contadorInvalidas = 0
+let contadorPalabras = 0
+
 // Splitear el archvio en lineas
 const lineas = archivo.split('\n')
 
@@ -30,15 +33,28 @@ for (const linea of lineas) {
     numMinString += linea[i]
   }
 
+  // Sacar el numero maximo/minimo de veces que debe salir la letra
   for (let i = posGuion + 1; i < linea.indexOf(' '); i++) {
     numMaxString += linea[i]
   }
 
+  // Convertir el numero en entero
   const numMin = parseInt(numMinString)
   const numMax = parseInt(numMaxString)
   const palabra = linea.split(' ').slice(2).toString()
 
   let numLetras = contarLetras(palabra, linea[posLetra])
-  console.log(palabra)
-  console.log(`${palabra}: ${numMin}-${numMax}`)
+
+  // Contar las palabra comprobadas y las palabras mal cifradas
+  if (numLetras < numMin || numLetras > numMax) contadorInvalidas++
+  if (contadorInvalidas == 42) {
+    break
+  }
+  contadorPalabras++
 }
+
+// Sacar la palabra mal cifrada numero 42
+const palabra = lineas[contadorPalabras].split(' ').slice(2).toString()
+
+// Escribir la palabra en el archivo
+await writeFile(`${process.cwd()}/Challenge_03/res_Challenge_03.txt`, palabra, {encoding: 'utf-8'})
