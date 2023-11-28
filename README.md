@@ -36,3 +36,6 @@ npm run challenge_02
 ```
 npm run challenge_03
 ```
+```
+npm run challenge_04
+```

@@ -47,7 +47,7 @@ for (const linea of lineas) {
 
   // Contar las palabra comprobadas y las palabras mal cifradas
   if (numLetras < numMin || numLetras > numMax) contadorInvalidas++
-  if (contadorInvalidas == 42) {
+  if (contadorInvalidas === 42) {
     break
   }
   contadorPalabras++
