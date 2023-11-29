@@ -1,30 +1,38 @@
 import { readFile, writeFile } from 'fs/promises'
-
 const archivo = await readFile(`${process.cwd()}/Challenge_04/files-quarantine.txt`, { encoding: 'utf-8' })
-
 const lineas = archivo.split('\n')
-
+let checksumsValidos = 0
 let data = ''
+
+// Funcion que devuelve si la letra esta repetida o no en el string
+function letraRepetida (cad, letra) {
+  for (let i = 0; i < cad.length; i++) {
+    if (cad.charAt(i) === letra) return true
+  }
+  return false
+}
+
+// Funcion que pasada una linea devuelve si el checksum es valido o no
+function checksumValido (linea) {
+  let res = ''
+  const cadenas = linea.split('-')
+
+  for (let i = 0; i < cadenas[0].length; i++) {
+    if (!letraRepetida(cadenas[0], cadenas[0].charAt(i))) res += cadenas[0].charAt(i)
+  }
+
+  if (res === cadenas[0]) return true
+  else return false
+
+}
 
 // Recorrer todas las lineas del archivo
 for (const linea of lineas) {
-  const cadenas = linea.split('-')
-  let checksumValido = ''; let coincidencias = false; let nCheckSumsValidos = 0
-
-  for (let i = 0; i !== cadenas[0].length; i++) {
-    for (let j = 0; j !== cadenas[0].length; j++) {
-      if (cadenas[0].charAt(j) === cadenas[0].charAt(i)) coincidencias = true
-    }
-
-    if (!coincidencias) checksumValido += cadenas[0].charAt(i)
+  checksumValido(linea)
+  if (checksumValido(linea)) checksumsValidos++
+  if (checksumsValidos === 33) {
+    data = lineas.split('-').slice(1)
   }
-
-  console.log(checksumValido)
-
-  if (checksumValido === cadenas[1]) nCheckSumsValidos++
-  if (nCheckSumsValidos === 33) data = checksumValido
-
-  coincidencias = false
 }
 
 await writeFile(`${process.cwd()}/Challenge_04/res_Challenge_04.txt`, data, { encoding: 'utf-8' })
