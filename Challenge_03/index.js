@@ -1,12 +1,12 @@
-import {readFile, writeFile} from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises'
 
-const archivo = await readFile(`${process.cwd()}/Challenge_03/encryption_policies.txt`, {encoding: 'utf-8'})
+const archivo = await readFile(`${process.cwd()}/Challenge_03/encryption_policies.txt`, { encoding: 'utf-8' })
 
 // Funcion que cuenta las letras que son las mismas que la pasada por parametros y devuelve el numero de veces que se repite
 function contarLetras (palabra, letraABuscar) {
   let contador = 0
 
-  let letras = palabra.split('')
+  const letras = palabra.split('')
 
   for (const letra of letras) {
     if (letra === letraABuscar) contador++
@@ -23,8 +23,8 @@ const lineas = archivo.split('\n')
 
 // Recorrer linea por linea
 for (const linea of lineas) {
-  let posLetra = linea.indexOf(':') - 1
-  let posGuion = linea.indexOf('-')
+  const posLetra = linea.indexOf(':') - 1
+  const posGuion = linea.indexOf('-')
   let numMinString = ''
   let numMaxString = ''
 
@@ -43,7 +43,7 @@ for (const linea of lineas) {
   const numMax = parseInt(numMaxString)
   const palabra = linea.split(' ').slice(2).toString()
 
-  let numLetras = contarLetras(palabra, linea[posLetra])
+  const numLetras = contarLetras(palabra, linea[posLetra])
 
   // Contar las palabra comprobadas y las palabras mal cifradas
   if (numLetras < numMin || numLetras > numMax) contadorInvalidas++
@@ -57,4 +57,4 @@ for (const linea of lineas) {
 const palabra = lineas[contadorPalabras].split(' ').slice(2).toString()
 
 // Escribir la palabra en el archivo
-await writeFile(`${process.cwd()}/Challenge_03/res_Challenge_03.txt`, palabra, {encoding: 'utf-8'})
+await writeFile(`${process.cwd()}/Challenge_03/res_Challenge_03.txt`, palabra, { encoding: 'utf-8' })
