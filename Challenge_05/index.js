@@ -10,7 +10,8 @@ function sacarPrimeraLetra (usuario) {
 }
 
 function idValido (id) {
-
+  if (id.typeOf === 'string') return true
+  else return false
 }
 
 function nombreUsuarioValido (nombreUsuario) {
@@ -31,7 +32,8 @@ function localidadValida (localidad) {
 
 function esUsuarioValido (usuario) {
   const datosUsuario = usuario.replace('\r', '').split(',')
-  if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValida(datosUsuario[3]) && localidadValida(datosUsuario[4])) console.log('asd')
+  // if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValida(datosUsuario[3]) && localidadValida(datosUsuario[4])) console.log('asd')
+  console.log(datosUsuario[0].typeOf())
 }
 
 for (const usuario of usuarios) {
