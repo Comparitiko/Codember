@@ -8,7 +8,8 @@
     "challenge_01": "node ./Challenge_01/index.js",
     "challenge_02": "node ./Challenge_02/index.js",
     "challenge_03": "node ./Challenge_03/index.js",
-    "challenge_04": "node ./Challenge_04/index.js"
+    "challenge_04": "node ./Challenge_04/index.js",
+    "challenge_05": "node ./Challenge_05/index.js"
   },
   "keywords": [],
   "author": "",
