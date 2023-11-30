@@ -10,34 +10,41 @@ function sacarPrimeraLetra (usuario) {
 }
 
 function idValido (id) {
-  if (id.typeOf === 'string') return true
+  if (typeof id === 'string') return true
   else return false
 }
 
 function nombreUsuarioValido (nombreUsuario) {
-  
+  if (typeof nombreUsuario === 'string') return true
+  else return false
 }
 
 function emailValido (email) {
-
+  if (email.indexOf('@') !== - 1 && email.indexOf('.com')) return true
+  else return false
 }
 
-function edadValida (edad) {
-
+function edadValidaONula (edad) {
+  if (edad === '') return true
+  let edadNum = parseInt(edad)
+  if (typeof edadNum === 'number') return true
+  else return false
 }
 
-function localidadValida (localidad) {
-
+function localidadValidaoNula (localidad) {
+  if (typeof id === 'string' || '') return true
+  else return false
 }
 
 function esUsuarioValido (usuario) {
   const datosUsuario = usuario.replace('\r', '').split(',')
-  // if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValida(datosUsuario[3]) && localidadValida(datosUsuario[4])) console.log('asd')
-  console.log(datosUsuario[0].typeOf())
+  console.log(edadValidaONula(datosUsuario[3]))
+  //if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValida(datosUsuario[3]) && localidadValida(datosUsuario[4])) return true
+  //else return false
 }
 
 for (const usuario of usuarios) {
-  esUsuarioValido(usuario)
+  if (esUsuarioValido(usuario)) res += sacarPrimeraLetra(usuario)
 }
 
-await writeFile(`${process.cwd()}/Challenge_05.txt`, res, {encoding: 'utf-8'})
+await writeFile(`${process.cwd()}/Challenge_05/res_Challenge_05.txt`, res, {encoding: 'utf-8'})
