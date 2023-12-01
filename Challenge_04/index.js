@@ -20,10 +20,8 @@ function checksumValido (linea) {
   for (let i = 0; i < cadenas[0].length; i++) {
     if (!letraRepetida(cadenas[0], cadenas[0].charAt(i))) res += cadenas[0].charAt(i)
   }
-  console.log(res)
-  if (res === cadenas[0]) return true
+  if (res === cadenas[1]) return true
   else return false
-
 }
 
 let checksumsValidos = 0
@@ -32,7 +30,13 @@ let checksumsComparados = 0
 // Recorrer todas las lineas del archivo
 for (const linea of lineas) {
   if (checksumValido(linea)) checksumsValidos++
-  if (checksumsValidos === 34) break
+  if (checksumsValidos === 34) {
+    console.log(linea.split('-').slice(1))
+    break
+  }
   checksumsComparados++
 }
-await writeFile(`${process.cwd()}/Challenge_04/res_Challenge_04.txt`, lineas[checksumsComparados].split("-").slice(1), { encoding: 'utf-8' })
+console.log(checksumsComparados)
+console.log(checksumsValidos)
+// console.log(lineas[checksumsComparados])
+// await writeFile(`${process.cwd()}/Challenge_04/res_Challenge_04.txt`, lineas[checksumsComparados], { encoding: 'utf-8' })
