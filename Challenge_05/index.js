@@ -2,6 +2,8 @@ import {readFile, writeFile} from 'fs/promises';
 const archivo = await readFile(`${process.cwd()}/Challenge_05/database-attacked.txt`, {encoding: 'utf-8'})
 const usuarios = archivo.split('\n')
 let res = ''
+let abecedario = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
+let numeros = '1234567890'.split('')
 
 // Funcion que devuelve la primera letra del userName
 function sacarPrimeraLetra (usuario) {
@@ -10,8 +12,11 @@ function sacarPrimeraLetra (usuario) {
 }
 
 function idValido (id) {
-  if (typeof id === 'string') return true
-  else return false
+  const letras = id.split('')
+  for (const letra of letras) {
+    if (!(letra in abecedario) || !(letra in numeros)) return false
+  }
+  return true
 }
 
 function nombreUsuarioValido (nombreUsuario) {
@@ -25,10 +30,11 @@ function emailValido (email) {
 }
 
 function edadValidaONula (edad) {
-  if (edad === '') return true
-  let edadNum = parseInt(edad)
-  if (typeof edadNum === 'number') return true
-  else return false
+  const digitosEdad = edad.split('-')
+  for (const digitoEdad of digitosEdad) {
+    if (digitoEdad !== '' || !(digitoEdad in numeros)) return false
+  }
+  return true
 }
 
 function localidadValidaoNula (localidad) {
@@ -38,9 +44,11 @@ function localidadValidaoNula (localidad) {
 
 function esUsuarioValido (usuario) {
   const datosUsuario = usuario.replace('\r', '').split(',')
+  // console.log(idValido(datosUsuario[0]))
+  // console.log(nombreUsuarioValido(datosUsuario[1]))
+  // console.log(emailValido(datosUsuario[2]))
   console.log(edadValidaONula(datosUsuario[3]))
-  //if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValida(datosUsuario[3]) && localidadValida(datosUsuario[4])) return true
-  //else return false
+  // console.log(localidadValidaoNula(datosUsuario[4])) 
 }
 
 for (const usuario of usuarios) {
