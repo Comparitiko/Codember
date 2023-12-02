@@ -54,7 +54,7 @@ for (const linea of lineas) {
 }
 
 // Sacar la palabra mal cifrada numero 42
-const palabra = lineas[contadorPalabras].split(' ').slice(2).toString()
+const palabra = lineas[contadorPalabras].split(' ').slice(2).toString().replace('\r', '')
 
 // Escribir la palabra en el archivo
 await writeFile(`${process.cwd()}/Challenge_03/res_Challenge_03.txt`, palabra, { encoding: 'utf-8' })

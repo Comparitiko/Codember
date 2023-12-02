@@ -1,9 +1,9 @@
-import {readFile, writeFile} from 'fs/promises';
-const archivo = await readFile(`${process.cwd()}/Challenge_05/database-attacked.txt`, {encoding: 'utf-8'})
+import { readFile, writeFile } from 'fs/promises'
+const archivo = await readFile(`${process.cwd()}/Challenge_05/database-attacked.txt`, { encoding: 'utf-8' })
 const usuarios = archivo.split('\n')
 let res = ''
-let abecedario = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
-let numeros = '1234567890'.split('')
+const abecedario = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
+const numeros = '1234567890'.split('')
 
 // Funcion que devuelve la primera letra del userName
 function sacarPrimeraLetra (usuario) {
@@ -25,7 +25,7 @@ function nombreUsuarioValido (nombreUsuario) {
 }
 
 function emailValido (email) {
-  if (email.indexOf('@') !== - 1 && email.indexOf('.com')) return true
+  if (email.indexOf('@') !== -1 && email.indexOf('.com') !== -1) return true
   else return false
 }
 
@@ -48,11 +48,11 @@ function esUsuarioValido (usuario) {
   // console.log(nombreUsuarioValido(datosUsuario[1]))
   // console.log(emailValido(datosUsuario[2]))
   console.log(edadValidaONula(datosUsuario[3]))
-  // console.log(localidadValidaoNula(datosUsuario[4])) 
+  // console.log(localidadValidaoNula(datosUsuario[4]))
 }
 
 for (const usuario of usuarios) {
   if (esUsuarioValido(usuario)) res += sacarPrimeraLetra(usuario)
 }
 
-await writeFile(`${process.cwd()}/Challenge_05/res_Challenge_05.txt`, res, {encoding: 'utf-8'})
+await writeFile(`${process.cwd()}/Challenge_05/res_Challenge_05.txt`, res, { encoding: 'utf-8' })
