@@ -2,34 +2,46 @@ import { readFile, writeFile } from 'fs/promises'
 const archivo = await readFile(`${process.cwd()}/Challenge_05/database-attacked.txt`, { encoding: 'utf-8' })
 const usuarios = archivo.split('\n')
 let res = ''
-const abecedario = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
-console.log(abecedario)
-const numeros = '1234567890'.split('')
-console.log(numeros)
 
-// Funcion que devuelve la primera letra del userName
-function sacarPrimeraLetra (usuario) {
-  const datosUsuario = usuario.split(',')
-  return datosUsuario[1].chartAt(0)
+const abecedario = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
+const numeros = '0123456789'.split('')
+function letraEnDiccionario (letra) {
+  for (const caracter of abecedario) {
+    if (caracter === letra) return true
+  }
+  for (const caracter of numeros) {
+    if (caracter === letra) return true
+  }
+  return false
 }
 
 function idValido (id) {
   const letras = id.split('')
   for (const letra of letras) {
-    // console.log(`Letra o numero ${letra} en diccionario: ${(letra in abecedario) || (letra in numeros)}`)
-    if (!(letra in abecedario) || !(letra in numeros)) return false
+    if (!letraEnDiccionario(letra)) return false
   }
   return true
 }
 
 function nombreUsuarioValido (nombreUsuario) {
-  if (typeof nombreUsuario === 'string') return true
-  else return false
+  const letras = nombreUsuario.split('')
+  for (const letra of letras) {
+    if (!letraEnDiccionario(letra)) return false
+  }
+  return true
 }
 
 function emailValido (email) {
-  if (email.indexOf('@') !== -1 && email.indexOf('.com') !== -1) return true
-  else return false
+  console.log(email)
+  if (email.indexOf('@') !== -1 && email.indexOf('.com') !== -1) {
+    const letrasAntesArroba = email.split('@').slice(0, 1)
+    console.log(letrasAntesArroba.toString())
+    for (const letra of letrasAntesArroba) {
+      if (!letraEnDiccionario(letra)) return false
+    }
+    return false
+  }
+  return false
 }
 
 function edadValidaONula (edad) {
@@ -41,13 +53,16 @@ function edadValidaONula (edad) {
 }
 
 function localidadValidaONula (localidad) {
-  if (typeof id === 'string' || '') return true
-  else return false
+  if (localidad === '') return true
+  const letras = localidad.split('')
+  for (const letra of letras) {
+    if (!letraEnDiccionario(letra)) return false
+  }
+  return true
 }
 
 function esUsuarioValido (usuario) {
   const datosUsuario = usuario.replace('\r', '').split(',')
-  idValido(datosUsuario[0])
   // console.log(idValido(datosUsuario[0]))
   // console.log(nombreUsuarioValido(datosUsuario[1]))
   // console.log(emailValido(datosUsuario[2]))
@@ -58,7 +73,7 @@ function esUsuarioValido (usuario) {
 }
 
 for (const usuario of usuarios) {
-  if (esUsuarioValido(usuario)) res += sacarPrimeraLetra(usuario)
+  if (!esUsuarioValido(usuario)) res += usuario.split(',').slice(1, 2).toString().charAt(0)
 }
 
 await writeFile(`${process.cwd()}/Challenge_05/res_Challenge_05.txt`, res, { encoding: 'utf-8' })
