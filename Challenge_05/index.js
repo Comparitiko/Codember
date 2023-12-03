@@ -69,22 +69,16 @@ function localidadValidaONula (localidad) {
   const letras = localidad.split('')
   if (letras[0] === '') return true
   for (const letra of letras) {
-    if (!letraEnAbecedario(letra)) return false
+    if (!letraEnAbecedario(letra) && letra !== ' ') return false
   }
   return true
 }
 
-let nUsuarios = 0
-
 // Funcion que devuelve si un usuario es valido o no
 function esUsuarioValido (usuario) {
   const datosUsuario = usuario.replace('\r', '').split(',')
-  nUsuarios++
   if (idValido(datosUsuario[0]) && nombreUsuarioValido(datosUsuario[1]) && emailValido(datosUsuario[2]) && edadValidaONula(datosUsuario[3]) && localidadValidaONula(datosUsuario[4])) return true
-  else {
-    console.log(`Usuario: ${datosUsuario}: Numero: ${nUsuarios} = false`)
-    return false
-  }
+  else return false
 }
 
 // Bucle para recorrer los usuarios de uno en uno pasandolos a la funcion de usuarios validos
